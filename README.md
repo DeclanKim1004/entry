@@ -8,7 +8,20 @@ It guides new users through the introductory channel `#마을광장` and leads t
 
 ## Usage
 1. Install dependencies: `pip install discord.py`
-2. Set your bot token in the `DISCORD_TOKEN` environment variable.
+2. Create a `config.json` file in the same directory as `bot.py` with the following structure (this file is ignored by git):
+
+   ```json
+   {
+       "token": "YOUR_DISCORD_TOKEN",
+       "database": {},
+       "guild_id": 0
+   }
+   ```
+
 3. Run the bot: `python bot.py`
+
+When a new member joins, the bot creates a private temporary channel where only
+the newcomer can see the introductory messages. This channel is automatically
+deleted shortly after the conversation ends.
 
 This script showcases the conversation flow described in the previous scenario.
