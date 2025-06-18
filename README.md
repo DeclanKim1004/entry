@@ -1,13 +1,13 @@
 # Discord RPG Opening Scenario
 
 This repository contains a simple script example for a Discord RPG-style opening.
-It guides new users through the introductory channel `#마을광장` and leads them to select a job in `#직업선택`.
+It guides new users through the introductory channel `#마을광장`, encourages them to greet other villagers there, and then leads them to select a job in `#직업선택`.
 
 ## Files
 - `bot.py`: Example Discord bot using `discord.py` to demonstrate timed NPC messages for new users.
 
 ## Usage
-1. Install dependencies: `pip install discord.py`
+1. Install dependencies: `pip install -r requirements.txt`
 2. Create a `config.json` file in the same directory as `bot.py` with the following structure (this file is ignored by git):
 
    ```json
