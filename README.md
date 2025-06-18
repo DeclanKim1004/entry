@@ -25,5 +25,7 @@ It guides new users through the introductory channel `#마을광장`, encourages
 Use the `초대` command to invite a member. The bot grants a temporary role and
 creates a private channel they can access. The channel is automatically
 generated for short-term conversations and can be removed afterwards.
+The cleanup now happens just 10 seconds after the user picks a role or the
+selection times out.
 
 This script showcases the conversation flow described in the previous scenario.
