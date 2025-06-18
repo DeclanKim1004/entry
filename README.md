@@ -5,6 +5,7 @@ It guides new users through the introductory channel `#마을광장`, encourages
 
 ## Files
 - `invite_role_bot.py`: Discord bot using `discord.py` to create temporary invitation channels.
+- `welcome_bot.py`: Demonstrates creating a private welcome channel for new members.
 
 ## Usage
 1. Install dependencies: `pip install -r requirements.txt`
@@ -21,6 +22,7 @@ It guides new users through the introductory channel `#마을광장`, encourages
    ```
 
 3. Run the bot: `python invite_role_bot.py`
+4. To test the welcome scenario, run `python welcome_bot.py`
 
 Use the `초대` command to invite a member. The bot grants a temporary role and
 creates a private channel they can access. The channel is automatically
