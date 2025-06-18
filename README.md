@@ -20,8 +20,10 @@ It guides new users through the introductory channel `#마을광장` and leads t
 
 3. Run the bot: `python bot.py`
 
-When a new member joins, the bot creates a private temporary channel where only
-the newcomer can see the introductory messages. This channel is automatically
-deleted shortly after the conversation ends.
+When a new member joins, the bot assigns them a temporary role called `신입`
+and creates a private channel only they can see. After they choose one of the
+job roles (`전사`, `마법사`, or `암살자`), the temporary role is removed and the
+channel is deleted shortly after the conversation ends. The NPC guiding them is
+named **이름모를불꽃**.
 
 This script showcases the conversation flow described in the previous scenario.
