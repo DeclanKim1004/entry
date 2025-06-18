@@ -42,6 +42,9 @@ async def on_member_join(member: discord.Member):
     overwrites = {
         guild.default_role: discord.PermissionOverwrite(read_messages=False),
         member: discord.PermissionOverwrite(read_messages=True),
+        guild.me: discord.PermissionOverwrite(
+            read_messages=True, send_messages=True
+        ),
     }
 
     channel = await guild.create_text_channel(
