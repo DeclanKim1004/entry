@@ -70,7 +70,8 @@ async def ask_for_job(
         )
 
     try:
-        reaction, _ = await bot.wait_for("reaction_add", check=check, timeout=60)
+        # Give users up to 10 minutes to pick their role before timing out.
+        reaction, _ = await bot.wait_for("reaction_add", check=check, timeout=600)
     except asyncio.TimeoutError:
         await channel.send("시간이 초과되어 채널을 정리합니다.")
     else:
