@@ -34,7 +34,7 @@ ROLE_EMOJIS = {
 async def delete_channel_later(
     channel: discord.TextChannel,
     role: discord.Role | None = None,
-    delay: int = 300,
+    delay: int = 10,
 ) -> None:
     """Delete the given channel (and role) after a delay in seconds."""
     await asyncio.sleep(delay)
@@ -81,7 +81,8 @@ async def ask_for_job(
         await member.add_roles(role)
         await channel.send(f"{member.mention}님께 {role.name} 역할을 부여했어요!")
 
-    asyncio.create_task(delete_channel_later(channel, private_role, delay=60))
+    # Clean up the temporary channel and role shortly after use.
+    asyncio.create_task(delete_channel_later(channel, private_role, delay=10))
 
 
 @bot.event
