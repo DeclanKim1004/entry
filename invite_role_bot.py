@@ -12,6 +12,7 @@ DISCORD_TOKEN = config["token"]
 
 intents = discord.Intents.default()
 intents.members = True
+intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Messages sent to new members when they join the server. Adjust the content as
