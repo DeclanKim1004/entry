@@ -4,13 +4,13 @@ This repository contains a simple script example for a Discord RPG-style opening
 It guides new users through the introductory channel `#마을광장`, encourages them to greet other villagers there, and then leads them to select a job in `#직업선택`.
 
 ## Files
-- `bot.py`: Example Discord bot using `discord.py` to demonstrate timed NPC messages for new users.
+- `invite_role_bot.py`: Discord bot using `discord.py` to create temporary invitation channels.
 
 ## Usage
 1. Install dependencies: `pip install -r requirements.txt`
    - Main packages: `fastapi`, `uvicorn`, `Flask`, `requests`, `PyMySQL`,
      `discord.py`, `nest_asyncio`, `pyngrok`, and `PyJWT`.
-2. Create a `config.json` file in the same directory as `bot.py` with the following structure (this file is ignored by git):
+2. Create a `config.json` file in the same directory as `invite_role_bot.py` with the following structure (this file is ignored by git):
 
    ```json
    {
@@ -20,12 +20,10 @@ It guides new users through the introductory channel `#마을광장`, encourages
    }
    ```
 
-3. Run the bot: `python bot.py`
+3. Run the bot: `python invite_role_bot.py`
 
-When a new member joins, the bot assigns them a temporary role called `신입`
-and creates a private channel only they can see. After they choose one of the
-job roles (`전사`, `마법사`, or `암살자`), the temporary role is removed and the
-channel is deleted shortly after the conversation ends. The NPC guiding them is
-named **이름모를불꽃**.
+Use the `초대` command to invite a member. The bot grants a temporary role and
+creates a private channel they can access. The channel is automatically
+generated for short-term conversations and can be removed afterwards.
 
 This script showcases the conversation flow described in the previous scenario.
