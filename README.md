@@ -8,6 +8,8 @@ It guides new users through the introductory channel `#마을광장`, encourages
 
 ## Usage
 1. Install dependencies: `pip install -r requirements.txt`
+   - Main packages: `fastapi`, `uvicorn`, `Flask`, `requests`, `PyMySQL`,
+     `discord.py`, `nest_asyncio`, `pyngrok`, and `PyJWT`.
 2. Create a `config.json` file in the same directory as `bot.py` with the following structure (this file is ignored by git):
 
    ```json
