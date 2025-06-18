@@ -1,9 +1,16 @@
 import os
+import json
 import discord
 import asyncio
 from discord.ext import commands
 
-TOKEN = os.getenv('DISCORD_TOKEN')
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.json")
+with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+    config = json.load(f)
+
+DISCORD_TOKEN = config["token"]
+DB_CONFIG = config.get("database")
+GUILD_ID = config.get("guild_id")
 
 intents = discord.Intents.default()
 intents.guilds = True
@@ -51,4 +58,4 @@ async def choose(ctx, *, job: str):
     await ctx.send(f"{ctx.author.mention}님, {job} 직업이 선택되었습니다!")
 
 if __name__ == "__main__":
-    bot.run(TOKEN)
+    bot.run(DISCORD_TOKEN)
