@@ -35,22 +35,33 @@ async def on_ready():
     print(f"Logged in as {bot.user.name}")
 
 
-@bot.event
-async def on_member_join(member: discord.Member):
-    guild = member.guild
-    hash_suffix = hex(member.id)[-4:]
+async def create_invite_channel(guild: discord.Guild, member: discord.Member) -> discord.TextChannel:
+    """Create a private role and channel for the given member."""
+    role_name = f"\ud83d\udd12\uc784\uc2dc\uc695\uc815-{member.id}"
+    role = discord.utils.get(guild.roles, name=role_name)
+    if role is None:
+        role = await guild.create_role(name=role_name)
+
+    await member.add_roles(role)
+
     overwrites = {
-        guild.default_role: discord.PermissionOverwrite(read_messages=False),
-        member: discord.PermissionOverwrite(read_messages=True),
-        guild.me: discord.PermissionOverwrite(
-            read_messages=True, send_messages=True
-        ),
+        guild.default_role: discord.PermissionOverwrite(view_channel=False),
+        role: discord.PermissionOverwrite(view_channel=True, send_messages=True),
+        guild.me: discord.PermissionOverwrite(view_channel=True, send_messages=True),
     }
 
     channel = await guild.create_text_channel(
-        name=f"welcome-{hash_suffix}",
+        name=f"\ube44\uacf5\uac1c-{member.id}",
         overwrites=overwrites,
+        reason="\uc2e0\uad8c \uc0ac\uc6a9\uc790 \uc804\uc6a9 \ucc44\ub110",
     )
+    return channel
+
+
+@bot.event
+async def on_member_join(member: discord.Member):
+    guild = member.guild
+    channel = await create_invite_channel(guild, member)
 
     for msg in OPENING_MESSAGES:
         await channel.send(msg)
@@ -62,27 +73,10 @@ async def on_member_join(member: discord.Member):
 @bot.command(name="초대")
 async def invite_channel(ctx, member: discord.Member):
     guild = ctx.guild
-    role_name = f"🔒임시초대-{member.id}"
-    role = discord.utils.get(guild.roles, name=role_name)
-    if role is None:
-        role = await guild.create_role(name=role_name)
-        await ctx.send(f"✅ 역할 `{role_name}` 생성 완료")
-
-    await member.add_roles(role)
-    await ctx.send(f"🎟️ {member.mention}님에게 `{role_name}` 역할을 부여했어요.")
-
-    overwrites = {
-        guild.default_role: discord.PermissionOverwrite(view_channel=False),
-        role: discord.PermissionOverwrite(view_channel=True, send_messages=True),
-        ctx.author: discord.PermissionOverwrite(view_channel=True),
-    }
-
-    channel = await guild.create_text_channel(
-        name=f"비공개-{member.id}",
-        overwrites=overwrites,
-        reason="임시 비공개 대화방 생성",
+    channel = await create_invite_channel(guild, member)
+    await ctx.send(
+        f"\ud83c\udf39 {member.mention}\ub2d8\uc744 \uc704\ud55c \ucc44\ub110 {channel.mention}\uc774 \uc0dd\uc131\ub418\uc5c8\uc5b4\uc694."
     )
-    await channel.send(f"🌟 {member.mention}님, 이곳은 당신만을 위한 방입니다!")
 
 
 if __name__ == "__main__":
